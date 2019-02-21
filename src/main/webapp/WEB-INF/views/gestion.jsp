@@ -50,13 +50,13 @@
 			<div class="form-group col-md-6">
 				<label for="oficina">Oficina</label>
 				<miform:select path="oficina_rep" class="form-control" id="oficina">
-					<miform:options items="${listarrepresentantes}" />
+					<miform:options items="${directoresMap}" />
 				</miform:select>
 			</div>
 			<div class="form-group col-md-6">
 				<label for="director">Director</label>
 				<miform:select path="director" class="form-control" id="director">
-					<miform:options items="${listardirectores}" />
+					<miform:options items="${oficinasMap}" />
 				</miform:select>
 			</div>
 		</div>

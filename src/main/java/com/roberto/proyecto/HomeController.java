@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -153,27 +154,23 @@ public class HomeController {
 		
 	
 	
-	//LISTADO REPRESENTANTES
+	//MAPEAR REPRESENTANTES Y OFICINAS
 	@ModelAttribute("listarrepresentantes")
-	public List<Integer> listarRepresentantes() {
-	   
+	public String listarRepresentantes(Model model) {
+		
 		Operaciones op = new Operaciones();
 		Connection cn = op.conexionmysql();
-		List<Integer> listaRep = op.listarRepresentantes(cn);
+		
+		Map<Integer, String> directores = op.listarDirectores(cn);
+		Map<Integer, String> oficinas = op.listarRepresentantes(cn);
+		
+		model.addAttribute("oficinasMap", oficinas);
+		model.addAttribute("directoresMap", directores);
 
-		return listaRep;
+		return "gestion";
 	}
 	
-	//LISTADO DIRECTORES
-	@ModelAttribute("listardirectores")
-	public List<Integer> listarDirectores() {
-	   
-		Operaciones op = new Operaciones();
-		Connection cn = op.conexionmysql();
-		List<Integer> listaDir = op.listarDirectores(cn);
-		
-		return listaDir;
-	}
-
+	
+	
 	
 }

@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -204,44 +206,50 @@ public class Operaciones{
 	
 	
 	//---------------DESPLEGABLES---------------
-	
-	//LISTAR REPRESENTANTES DESPLEGABLE
-	public ArrayList<Integer> listarRepresentantes(Connection cn) {
-
-		ArrayList<Integer> milista = new ArrayList<Integer>();
-		String consulta = "SELECT oficina_rep FROM repventas GROUP BY oficina_rep";
-		try {
+	//LISTAR REPRESENTANTES
+	public Map<Integer, String> listarRepresentantes(Connection cn) {
+		Map<Integer, String> repVentas = new HashMap<Integer, String>();
+		String consulta = "SELECT repventas.NUMERO_REP, repventas.NOMBRE FROM repventas";
+		
+		try {	
 			Statement sentencia = cn.createStatement();
 			ResultSet res = sentencia.executeQuery(consulta);
-			while (res.next()) {
-				milista.add(res.getInt(1));
+
+			while(res.next()) {
+				repVentas.put(res.getInt("NUMERO_REP"), res.getString("NOMBRE"));
 			}
 			res.close();
 			sentencia.close();
+			
 		} catch (SQLException e) {
-			System.out.println("ERROR AL CARGAR LAS OFICINAS EN LA LISTA");
-
-		}
-		return milista;
+			e.printStackTrace();
+		}	
+		
+		return repVentas;
 	}
 	
-	//LISTAR DIRECTORES DESPLEGABLE
-	public ArrayList<Integer> listarDirectores(Connection cn) {
-
-		ArrayList<Integer> milista = new ArrayList<Integer>();
-		String consulta = "SELECT director FROM repventas GROUP BY director";
-		try {
+	
+	//LISTAR DIRECTORES
+	public Map<Integer, String> listarDirectores(Connection cn) {
+		Map<Integer, String> oficinas = new HashMap<Integer, String>();
+		String consulta = "SELECT oficinas.OFICINA, oficinas.CIUDAD FROM oficinas";
+		
+		try {	
 			Statement sentencia = cn.createStatement();
 			ResultSet res = sentencia.executeQuery(consulta);
-			while (res.next()) {
-				milista.add(res.getInt(1));
+			
+			while(res.next()) {
+				oficinas.put(res.getInt("OFICINA"), res.getString("CIUDAD"));
 			}
 			res.close();
 			sentencia.close();
+			
 		} catch (SQLException e) {
-			System.out.println("ERROR AL CARGAR LOS DIRECTORES EN LA LISTA");
-
-		}
-		return milista;
+			e.printStackTrace();
+		}	
+		
+		return oficinas;
 	}
+	
+	
 }
