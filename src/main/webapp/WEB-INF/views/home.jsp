@@ -10,8 +10,8 @@
 </h1>
 
 <P><a href="listarregiones">Listar regiones</a></P>
-<P><a href="">Listar oficinas</a></P>
-<P><a href="">Gestionar representantes de ventas</a></P>
+<P><a href="listaroficinas">Listar oficinas</a></P>
+<P><a href="gestion">Gestionar representantes de ventas</a></P>
 
 </body>
 </html>
