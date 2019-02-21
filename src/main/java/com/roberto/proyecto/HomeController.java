@@ -171,7 +171,6 @@ public class HomeController {
 		Operaciones op = new Operaciones();
 		Connection cn = op.conexionmysql();
 		List<Integer> listaDir = op.listarDirectores(cn);
-		System.out.println(listaDir);
 		
 		return listaDir;
 	}
